@@ -4,8 +4,8 @@
 #include "tdg.h"
 
 static unsigned int s_max_number_of_runs = MAX_NUMBER_OF_RUNS;
-static void* nextInt();
-static void* nextChar();
+static void* nextInt(void*);
+static void* nextChar(void*);
 
 static Gen _integers = { .next = nextInt };
 static Gen _characters = { .next = nextChar };
@@ -42,15 +42,18 @@ Gen* integers()
 	return &_integers;
 }
 
+
 Gen* fixedValues(void* arg, ...)
 {
-	// FIXME: TBD
-#if 0
 	va_list params;
 
 	va_start(params, arg);
 	va_end(params);
-#endif
+}
+
+static void* nextFixedValue(void* env)
+{
+
 }
 
 Gen* characters()
@@ -58,12 +61,12 @@ Gen* characters()
 	return &_characters;
 }
 
-static void* nextInt()
+static void* nextInt(void* env)
 {
 	return (void*)rand();
 }
 
-static void* nextChar()
+static void* nextChar(void* env)
 {
 	char ret = rand() % 256;
 	return (void*)ret;

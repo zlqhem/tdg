@@ -20,6 +20,12 @@ typedef struct _Gen {
 	void* env;				// optional data for generating a value
 } Gen;
 
+typedef struct _FixedGen {
+	Gen gen;
+	void** values;
+	int len;
+} FixedGen;
+
 extern void* Gen_next(Gen* gen);
 
 // Iterable
@@ -28,16 +34,14 @@ extern List* toListUntil(Gen* gen, unsigned int max);
 
 // Primitive Gen
 extern Gen* integers(void);
-extern Gen* fixedValues(void* arg, ...);
 extern Gen* characters(void);
-extern Gen* anyFloat(void);
-
+extern Gen* floats(void);
+extern Gen* fixedValues(void* arg, ...);
 
 // Combinator
-//	oneOf
-//	pairs
-//	ensureValues
-//	frequency
+extern Gen* oneOf(Gen* g, ...);
+// extern Gen* pair(Gen* ga, Gen* gb);
+// extern Gen* frequency(Gen*, int weight);
 
 // Combined Gen
 

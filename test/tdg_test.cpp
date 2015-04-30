@@ -46,18 +46,13 @@ TEST(TDG_Basic, characters)
 	}
 }
 
-void* nextIntBoundaries (void* env)
-{
-		// FIXME: TBD
-		int boundary = (int)env;
-		return boundary;
-}
-
 Gen* genIntBoundaries(int boundary)
 {
-		Gen* gen = ALLOC(Gen);
-		gen->next = (generator)nextIntBoundaries;
-		gen->env = (void*)boundary;
+		Gen* gen = fixedValues(
+						boundary-1,
+						boundary,
+						boundary);
+
 		return gen;
 }
 
